@@ -250,6 +250,109 @@
   .ract{display:flex;flex-direction:column;align-items:center;gap:10px}
   .ract .btn{width:76%;letter-spacing:.2em;font-size:15px;padding:13px 0}
   .ract .btn.ghost{width:58%}
+
+  /* ==================== 爆款视觉增强层 ==================== */
+  body{background:radial-gradient(ellipse at 50% -10%,#3d1a11 0%,#180a06 46%,#070302 100%) fixed}
+
+  .app::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(circle at 12% 16%,rgba(255,196,80,.16),transparent 42%),
+      radial-gradient(circle at 88% 10%,rgba(192,57,43,.2),transparent 40%),
+      radial-gradient(circle at 50% 94%,rgba(212,175,55,.13),transparent 46%);
+    animation:breathe 7s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{opacity:.72;transform:scale(1)}
+    50%{opacity:1;transform:scale(1.07)}
+  }
+
+  /* 鎏金标题 */
+  .h1{
+    background:linear-gradient(180deg,#fff6d0 0%,#f3dc95 36%,#c9962b 70%,#f7e7b0 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 3px 0 rgba(90,16,16,.95)) drop-shadow(0 0 24px rgba(255,190,60,.45));
+  }
+  .card{
+    backdrop-filter:blur(6px);
+    background:linear-gradient(180deg,rgba(78,38,24,.92),rgba(26,13,8,.97));
+  }
+
+  /* 标签徽章 */
+  .badges{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:12px 0 18px;width:100%}
+  .badge{
+    padding:6px 11px;border-radius:999px;font-size:11px;letter-spacing:.03em;
+    border:1px solid rgba(212,175,55,.45);background:rgba(212,175,55,.1);color:#f0d98c;
+    white-space:nowrap;
+  }
+  .badge.hot{border-color:#ff8a4c;background:rgba(255,138,76,.16);color:#ffc09a;box-shadow:0 0 12px rgba(255,138,76,.3)}
+
+  /* 按钮流光 */
+  .btn{position:relative;overflow:hidden}
+  .btn::after{
+    content:"";position:absolute;top:0;left:-60%;width:38%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.32),transparent);
+    transform:skewX(-18deg);animation:sweep 2.8s infinite;
+  }
+  @keyframes sweep{0%{left:-60%}55%{left:135%}100%{left:135%}}
+
+  /* 资源数字跳动 */
+  .res .v{display:inline-block;transition:transform .18s,color .18s,text-shadow .18s}
+  .res .v.bump{transform:scale(1.42);color:#fff4c8;text-shadow:0 0 16px rgba(255,214,110,.95)}
+
+  /* 称号 + 威胁条 */
+  .titlebadge{
+    display:inline-flex;align-items:center;gap:4px;padding:4px 11px;border-radius:999px;
+    font-size:11px;font-weight:700;color:#3a1010;letter-spacing:.04em;
+    background:linear-gradient(180deg,#ffeeb4,#dfb44a);
+    box-shadow:0 0 16px rgba(224,182,74,.55),inset 0 1px 0 rgba(255,255,255,.6);
+  }
+  .threatrow{display:flex;justify-content:space-between;font-size:10.5px;color:#c9a15e;
+    margin:0 8px 4px;letter-spacing:.06em}
+  .threat{height:7px;border-radius:99px;background:rgba(255,255,255,.09);
+    overflow:hidden;margin:0 6px 8px;box-shadow:inset 0 1px 3px rgba(0,0,0,.7)}
+  .threat i{
+    display:block;height:100%;border-radius:99px;
+    background:linear-gradient(90deg,#c0392b,#ff7a45,#ffd76e);
+    box-shadow:0 0 12px rgba(255,122,69,.75);transition:width .55s cubic-bezier(.2,.9,.3,1);
+  }
+
+  /* 棋盘图标与占城光效 */
+  .cell .ic{font-size:clamp(13px,4vw,18px);line-height:1;margin-bottom:1px;
+    filter:drop-shadow(0 0 6px rgba(255,190,60,.4))}
+  .cell.owned{box-shadow:inset 0 0 0 1px rgba(95,212,106,.5),inset 0 0 20px rgba(95,212,106,.13)}
+  .cell.now{animation:cellpulse 1.7s ease-in-out infinite}
+  @keyframes cellpulse{
+    0%,100%{box-shadow:inset 0 0 0 2px var(--gold),0 0 12px rgba(212,175,55,.5)}
+    50%{box-shadow:inset 0 0 0 2px var(--gold),0 0 28px rgba(212,175,55,.9)}
+  }
+  .dice{box-shadow:0 5px 14px rgba(0,0,0,.55),0 0 24px rgba(255,214,110,.35),inset 0 -3px 8px rgba(0,0,0,.15)}
+
+  /* 弹窗顶部鎏金条 */
+  .modal{position:relative}
+  .modal::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;border-radius:13px 13px 0 0;
+    background:linear-gradient(90deg,#8b1a1a,#ffd76e,#8b1a1a);
+  }
+
+  /* 飘字 */
+  .floatnum{
+    position:fixed;z-index:300;pointer-events:none;font-size:15px;font-weight:700;
+    font-variant-numeric:tabular-nums;text-shadow:0 2px 10px rgba(0,0,0,.85);
+    animation:floatup .92s cubic-bezier(.2,.9,.3,1) forwards;
+  }
+  .floatnum.up{color:#86ffa6}
+  .floatnum.down{color:#ff8585}
+  @keyframes floatup{
+    0%{opacity:0;transform:translate(-50%,6px) scale(.7)}
+    16%{opacity:1;transform:translate(-50%,-8px) scale(1.18)}
+    100%{opacity:0;transform:translate(-50%,-54px) scale(.92)}
+  }
+
+  /* 彩带 */
+  .confetti{position:fixed;top:-14px;width:8px;height:14px;z-index:400;pointer-events:none;
+    border-radius:2px;animation:fall linear forwards}
+  @keyframes fall{to{transform:translateY(108vh) rotate(760deg);opacity:.08}}
 </style>
 </head>
 <body>
@@ -277,6 +380,13 @@
       <div class="rule"><i>王</i><span>兵临邯郸，决战王郎</span></div>
     </div>
 
+    <div class="badges">
+      <span class="badge hot">🔥 16 座城池</span>
+      <span class="badge">🎲 掷骰走位</span>
+      <span class="badge">📜 5 题路演</span>
+      <span class="badge">⚔ 3 种结局</span>
+    </div>
+
     <button class="btn primary" id="btnStart">开 始 征 程</button>
     <button class="btn ghost" id="btnContinue" style="margin-top:12px;display:none">继 续 征 程</button>
     <div class="home-foot">TRAE 好应用大赏赛 · 游戏娱乐赛道</div>
@@ -294,10 +404,13 @@
     </div>
 
     <div class="turnbar">
-      <span id="vTurn">第 1 回合</span>
-      <span class="mid"><span id="vLap">已绕 0 圈</span></span>
+      <span class="titlebadge" id="titleBadge">破虏将军</span>
+      <span class="mid"><span id="vTurn">第 1 回合</span><span id="vLap">已绕 0 圈</span></span>
       <div class="soundbtn" id="btnSound">🔊 音效开</div>
     </div>
+
+    <div class="threatrow"><span>👑 王郎威胁</span><span id="threatTxt">3600</span></div>
+    <div class="threat"><i id="threatBar" style="width:100%"></i></div>
 
     <div class="boardwrap">
       <div class="board" id="board"></div>
@@ -540,8 +653,16 @@
   }
 
   function applyEffect(effect){
+    const MAP = { troops:'vTroops', grain:'vGrain', money:'vMoney', reputation:'vRep', allies:'vAlly' };
     for (const k in effect){
-      if (typeof S[k] === 'number') S[k] = Math.max(0, S[k] + effect[k]);
+      if (typeof S[k] !== 'number') continue;
+      const before = S[k];
+      S[k] = Math.max(0, before + effect[k]);
+      const delta = S[k] - before;
+      if (delta !== 0){
+        floatNum(MAP[k], delta);
+        bump(MAP[k]);
+      }
     }
   }
 
@@ -555,6 +676,68 @@
     return out;
   }
 
+  /* ================= 表现层小工具 ================= */
+  const ICON = {
+    start:'🏯', city:'🏰', finance:'📜', recruit:'🎖',
+    grain:'🌾', battle:'⚔️', chance:'🎴', alliance:'💍', capital:'👑'
+  };
+
+  // 资源飘字
+  function floatNum(elId, delta){
+    if (!elId) return;
+    const el = $(elId);
+    if (!el || !el.getBoundingClientRect) return;
+    const r = el.getBoundingClientRect();
+    const d = document.createElement('div');
+    d.className = 'floatnum ' + (delta > 0 ? 'up' : 'down');
+    d.textContent = (delta > 0 ? '+' : '') + delta;
+    d.style.left = (r.left + r.width / 2) + 'px';
+    d.style.top = r.top + 'px';
+    document.body.appendChild(d);
+    setTimeout(function(){ if (d.parentNode) d.parentNode.removeChild(d); }, 950);
+  }
+
+  // 数字跳动
+  let bumpTimer = null;
+  function bump(elId){
+    if (!elId) return;
+    const el = $(elId);
+    if (!el || !el.classList) return;
+    el.classList.add('bump');
+    clearTimeout(bumpTimer);
+    bumpTimer = setTimeout(function(){ el.classList.remove('bump'); }, 220);
+  }
+
+  // 彩带
+  function confetti(){
+    const colors = ['#ffd76e','#c0392b','#f0d98c','#5fd46a','#e07a3c','#fff3c4'];
+    for (let i = 0; i < 60; i++){
+      const c = document.createElement('i');
+      c.className = 'confetti';
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.background = colors[Math.floor(Math.random() * colors.length)];
+      c.style.animationDuration = (1.5 + Math.random() * 1.6) + 's';
+      c.style.animationDelay = (Math.random() * 0.6) + 's';
+      c.style.transform = 'rotate(' + Math.floor(Math.random() * 360) + 'deg)';
+      document.body.appendChild(c);
+      (function(node){
+        setTimeout(function(){ if (node.parentNode) node.parentNode.removeChild(node); }, 3600);
+      })(c);
+    }
+  }
+
+  // 称号
+  function titleOf(){
+    if (S.wangLangDefeated) return '👑 光武帝';
+    const c = Object.keys(S.cities).length;
+    if (c >= 5) return '河北之主';
+    if (S.alliedLiuYang) return '真定佳婿';
+    if (S.reputation >= 90) return '众望所归';
+    if (c >= 3) return '一方诸侯';
+    if (c >= 1) return '初露锋芒';
+    return '破虏将军';
+  }
+
   /* ================= 渲染 ================= */
   function buildBoard(){
     const b = $('board');
@@ -565,6 +748,7 @@
       const cls = 'cell c-' + c.type + (c.wangLang ? ' wl' : '');
       html += '<div class="' + cls + '" id="cell' + i + '" '
             + 'style="grid-row:' + (p[0] + 1) + ';grid-column:' + (p[1] + 1) + '">'
+            + '<div class="ic">' + (ICON[c.type] || '·') + '</div>'
             + '<div class="nm">' + c.name + '</div>'
             + (c.type === 'start' ? '' : '<div class="tg">' + TYPE_LABEL[c.type] + '</div>')
             + '</div>';
@@ -589,6 +773,15 @@
     $('vWang').textContent = S.wangLangDefeated ? '灭' : S.wangLangTroops;
     $('vTurn').textContent = '第 ' + S.turn + ' 回合';
     $('vLap').textContent = '已绕 ' + S.lap + ' 圈';
+
+    const tb = $('titleBadge');
+    if (tb) tb.textContent = titleOf();
+
+    const threatPct = S.wangLangDefeated ? 0 : Math.max(0, Math.min(100, S.wangLangTroops / 36));
+    const tbar = $('threatBar');
+    if (tbar) tbar.style.width = threatPct + '%';
+    const ttxt = $('threatTxt');
+    if (ttxt) ttxt.textContent = S.wangLangDefeated ? '已灭' : S.wangLangTroops;
 
     for (let i = 0; i < BOARD.length; i++){
       const el = $('cell' + i);
@@ -993,6 +1186,7 @@
                  : (reason || '大业未竟。'))
           + '</div>'
           + '<div class="stats">'
+          + '<div><span>最终称号</span><b>' + titleOf() + '</b></div>'
           + '<div><span>最终兵力</span><b>' + S.troops + '</b></div>'
           + '<div><span>攻取城池</span><b>' + cities + '</b></div>'
           + '<div><span>征战回合</span><b>' + S.turn + '</b></div>'
@@ -1003,7 +1197,7 @@
           + '<button class="btn ghost" data-act="home">返 回 首 页</button>'
           + '</div>';
     openModal(h);
-    if (win) { sfx('win'); vib('heavy'); } else { sfx('lose'); vib('heavy'); }
+    if (win) { sfx('win'); vib('heavy'); confetti(); } else { sfx('lose'); vib('heavy'); }
     render();
   }
 
