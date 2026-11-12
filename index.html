@@ -259,25 +259,26 @@ var ROUNDS=[
 ];
 var CHANCES=[
  {tag:"⚡ 突发 · 竞品搞事",title:"王郎在邯郸称帝了！",text:"算命的王郎自称汉成帝之子，在邯郸抢先“上市”，还开出十万户侯的悬赏买你人头。河北郡县一半在观望你的反应——这波舆情，公关还是潜行？",choices:[
-   {b:"📜 发檄文公开打假",s:"粮饷 -25 · 民心 +18",fx:{g:-25,f:18},r:"檄文传遍河北：“成帝之子早已葬于延陵！”观望者纷纷倒戈，酒馆里都有人替你骂王郎。"},
-   {b:"🥷 低调潜行，先活下来",s:"粮饷 -10 · 兵马 +10（收编散兵）",fx:{g:-10,a:10},r:"你避开锋芒夜行昼伏，沿途收编散兵。面子丢了，里子厚了。"}]},
+   {b:"📜 发檄文公开打假",s:"粮饷 -15 · 民心 +20",fx:{g:-15,f:20},r:"檄文传遍河北：“成帝之子早已葬于延陵！”观望者纷纷倒戈，酒馆里都有人替你骂王郎。"},
+   {b:"🥷 低调潜行，先活下来",s:"粮饷 +5 · 兵马 +15（收编散兵）",fx:{g:5,a:15},r:"你避开锋芒夜行昼伏，沿途收编散兵。面子丢了，里子厚了。"}]},
  {tag:"🎁 机会 · 天降团队",title:"铜马军数十万，来投！",text:"河北最大的“并购标的”出现了：铜马军数十万人马乏粮来降。收，全军粮饷告急；不收，他们转头就是敌人。冯异说：这叫“收之则强，拒之则散”。",choices:[
-   {b:"🍚 开仓放粮，整编收纳！",s:"粮饷 -60 · 兵马 +95 · 解锁战略轮",fx:{g:-60,a:95},flag:"tongma",r:"你亲自巡营、与降卒同吃一锅饭。数十万大军就此改姓刘——河北兵力榜，你登顶了！"},
-   {b:"🔍 只收精锐，其余遣散",s:"兵马 +35 · 民心 +10",fx:{a:35,f:10},r:"精挑细选留下精锐，遣散者感念活命之恩，四处传你的仁名。稳健，但错过了登顶的机会。"}]},
+   {b:"🍚 开仓放粮，整编收纳！",s:"粮饷 -30 · 兵马 +95 · 解锁战略轮",fx:{g:-30,a:95},flag:"tongma",r:"你亲自巡营、与降卒同吃一锅饭。数十万大军就此改姓刘——河北兵力榜，你登顶了！"},
+   {b:"🔍 只收精锐，其余遣散",s:"兵马 +35 · 民心 +10",fx:{a:35,f:10,g:15},r:"精挑细选留下精锐，遣散者感念活命之恩，四处传你的仁名。稳健，但错过了登顶的机会。"}]},
  {tag:"❄️ 机会 · 天助自助者",title:"滹沱河一夜冰合",text:"王郎大军追至滹沱河，河水未冻，退无可退。半夜气温骤降，冰面竟能行军！全军看着你：这冰，过还是等？",choices:[
-   {b:"🌉 趁冰未化，全军速渡！",s:"民心 +12 · 粮饷 +20（缴获辎重）",fx:{f:12,g:20},r:"大军踏冰而过，天明冰解，追兵隔河长叹。从此军中盛传：你是有天命的人。"},
-   {b:"🔥 生火扎营，稳一手",s:"粮饷 -20 · 兵马 +5",fx:{g:-20,a:5},r:"你选择稳扎稳打。冰化了，路绕了，但队伍整整齐齐——创业不赌命，也是一种天命。"}]},
+   {b:"🌉 趁冰未化，全军速渡！",s:"民心 +15 · 粮饷 +25（缴获辎重）",fx:{f:15,g:25},r:"大军踏冰而过，天明冰解，追兵隔河长叹。从此军中盛传：你是有天命的人。"},
+   {b:"🔥 生火扎营，稳一手",s:"粮饷 +5 · 兵马 +10 · 民心 +5",fx:{g:5,a:10,f:5},r:"你选择稳扎稳打。冰化了，路绕了，但队伍整整齐齐——创业不赌命，也是一种天命。"}]},
  {tag:"🍶 路演 · 豪强夜宴",title:"信都豪强设宴“尽调”你",text:"酒过三巡，老豪强眯着眼问：“文叔啊，王郎势大，你这项目……凭什么赢？”全场安静。这是你最重要的三分钟路演。",choices:[
-   {b:"🎤 讲愿景：复兴汉室，功名与诸君共之",s:"粮饷 +45（当场认购）· 民心 +8",fx:{g:45,f:8},r:"“秀无他能，唯推赤心置人腹中。”满座动容，当场凑出一车粮草。会讲故事，也是生产力。"},
-   {b:"📊 讲数据：昆阳九千破四十二万",s:"兵马 +25（子弟来投）· 民心 +4",fx:{a:25,f:4},r:"你把昆阳战报往桌上一拍。豪强子弟当场请缨入伍——硬核战绩，就是最好的 BP。"}]},
+   {b:"🎤 讲愿景：复兴汉室，功名与诸君共之",s:"粮饷 +55（当场认购）· 民心 +12",fx:{g:55,f:12},r:"“秀无他能，唯推赤心置人腹中。”满座动容，当场凑出一车粮草。会讲故事，也是生产力。"},
+   {b:"📊 讲数据：昆阳九千破四十二万",s:"兵马 +30（子弟来投）· 民心 +8 · 粮饷 +10",fx:{a:30,f:8,g:10},r:"你把昆阳战报往桌上一拍。豪强子弟当场请缨入伍——硬核战绩，就是最好的 BP。"}]},
  {tag:"🏛️ 突发 · 总部猜忌",title:"更始帝的使者到了",text:"长安来人，话里有话：朝廷对你“在河北坐大”很不放心，暗示收兵回朝。将在外——这杯“总部的酒”，喝还是不喝？",choices:[
-   {b:"🎁 厚礼送使者，将在外君命有所不受",s:"粮饷 -30 · 民心 +6 · 保住兵马",fx:{g:-30,f:6},r:"使者揣着重礼满意而归，你留下了一句千古名言的雏形：河北未平，我怎能走？"},
-   {b:"📩 上表自辩，拖字诀",s:"民心 -5 · 粮饷 +15（截留税粮）",fx:{f:-5,g:15},r:"表书写得情真意切，寄到长安要走两个月。这两个月，足够你再下三城。"}]},
+   {b:"🎁 厚礼送使者，将在外君命有所不受",s:"粮饷 -15 · 民心 +10 · 保住兵马",fx:{g:-15,f:10},r:"使者揣着重礼满意而归，你留下了一句千古名言的雏形：河北未平，我怎能走？"},
+   {b:"📩 上表自辩，拖字诀",s:"民心 +5 · 粮饷 +20（截留税粮）",fx:{f:5,g:20},r:"表书写得情真意切，寄到长安要走两个月。这两个月，足够你再下三城。"}]},
  {tag:"🌾 民心 · 微服私访",title:"你路过一个被兵祸掏空的村子",text:"老农说，十年里换了七拨“王师”，每拨都抢粮。你的军需官小声提醒：军粮只够十天了。仓门开不开，你一句话。",choices:[
-   {b:"🏺 开仓赈济，还免今年田租",s:"粮饷 -35 · 民心 +22",fx:{g:-35,f:22},r:"消息传开，逃亡的百姓扶老携幼回来种地。三个月后，这个村主动送来了军粮——民心，是会复利的。"},
-   {b:"⚖️ 借粮打欠条，秋后双倍还",s:"粮饷 +25 · 民心 +6",fx:{g:25,f:6},r:"白纸黑字，盖你的印。老农把欠条供在堂屋——这是河北第一张“刘秀债券”，信用就这么立起来的。"}]}
+   {b:"🏺 开仓赈济，还免今年田租",s:"粮饷 -20 · 民心 +28",fx:{g:-20,f:28},r:"消息传开，逃亡的百姓扶老携幼回来种地。三个月后，这个村主动送来了军粮——民心，是会复利的。"},
+   {b:"⚖️ 借粮打欠条，秋后双倍还",s:"粮饷 +35 · 民心 +10",fx:{g:35,f:10},r:"白纸黑字，盖你的印。老农把欠条供在堂屋——这是河北第一张“刘秀债券”，信用就这么立起来的。"}]}
 ];
-var grain=260, army=50, fame=60, pos=0, turn=0, lap=1, busy=false, over=false;
+var grain=320, army=50, fame=60, pos=0, turn=0, lap=1, busy=false, over=false;
+function marchCost(){ return Math.max(3, 8-Math.floor(fame/20)); }
 var owned={}, level={}, roundDone={}, flags={};
 owned[0]=true; level[0]=1;
 var board=document.getElementById('board');
@@ -366,7 +367,7 @@ function update(){
   var qs=[
     {t:'拿下真定，解锁种子轮（刘扬十万众）',d:!!owned[8]},
     {t:'关键城进度：'+keyGot+' / 5（邯郸·真定·中山·蓟县·渔阳）',d:keyGot>=5},
-    {t:'兵马扩至 280（当前 '+army+'）',d:army>=280},
+    {t:'兵马扩至 220（当前 '+army+'）',d:army>=220},
     {t:'任意一座城升级到 Lv.3，成为粮仓重镇',d:Object.keys(level).some(function(k){return level[k]>=3})}
   ];
   $('quests').innerHTML=qs.map(function(q){return '<li class="'+(q.d?'done':'')+'">'+(q.d?'✅ ':'▸ ')+q.t+'</li>'}).join('');
@@ -399,8 +400,8 @@ function checkRoundsBonus(){
   });
 }
 function checkEnd(){
-  var keyOk=[5,8,9,13,14].every(function(i){return owned[i]});
-  if(keyOk && army>=280){ over=true; showEnd(true); return true }
+  var keyOk=[5,8,9,13,14].filter(function(i){return owned[i]}).length>=4;
+  if(keyOk && army>=220){ over=true; showEnd(true); return true }
   if(grain<=0){ over=true; showEnd(false); return true }
   return false;
 }
@@ -418,11 +419,11 @@ function land(){
   if(t.t==='start'){ showEvent('🏯 回到信都','大本营补给','信都父老箪食壶浆。任光说：河北的投资人们都在看你的下一城。',[{b:'🍚 补充给养，整军再战',s:'粮饷 +30 · 民心 +5',fx:{g:30,f:5},r:'补给到账，全军士气大振。'}]); return; }
   if(t.t==='chance'){ var c=CHANCES[Math.floor(Math.random()*CHANCES.length)]; showEvent(c.tag,c.title,c.text,c.choices); return; }
   if(t.t==='market'){ showEvent('🛒 元城粮仓市集','河北最大的粮食交易所','粮价今日波动。军需官、粮商和急于投军的青壮都挤在市集口——你的粮饷，既能买粮，也能“买人”。',[
-    {b:'🌾 低价囤粮',s:'粮饷 +55（倒卖陈粮差价）· 民心 -4',fx:{g:55,f:-4},r:'一波漂亮的粮食套利，仓官对你刮目相看，就是名声有点“商人气”。'},
-    {b:'📣 开粥棚招兵',s:'粮饷 -30 · 兵马 +38',fx:{g:-30,a:38},r:'粥香飘出三里，青壮排队投军。乱世里，一碗热粥就是最好的招聘广告。'}]); return; }
+    {b:'🌾 低价囤粮',s:'粮饷 +65（倒卖陈粮差价）· 民心 -3',fx:{g:65,f:-3},r:'一波漂亮的粮食套利，仓官对你刮目相看，就是名声有点“商人气”。'},
+    {b:'📣 开粥棚招兵',s:'粮饷 -25 · 兵马 +45',fx:{g:-25,a:45},r:'粥香飘出三里，青壮排队投军。乱世里，一碗热粥就是最好的招聘广告。'}]); return; }
   if(t.t==='rest'){ showEvent('🌲 柏人休整','当年高祖避祸之地','柏人县，汉高祖曾因谐音“迫人”连夜绕行。你在此扎营，炊烟一起，逃走的百姓慢慢回来了。',[
-    {b:'🏺 赈济百姓，约法三章',s:'粮饷 -20 · 民心 +20',fx:{g:-20,f:20},r:'军纪严明、秋毫无犯。柏人百姓送来劳军酒——你的“品牌部”又立功了。'},
-    {b:'😴 全军休整，磨刀不误砍柴工',s:'粮饷 +18（就地征购顺利）· 兵马 +8',fx:{g:18,a:8},r:'睡了个整觉，战马都长膘了。路过的猎户主动加入斥候队。'}]); return; }
+    {b:'🏺 赈济百姓，约法三章',s:'粮饷 -15 · 民心 +25',fx:{g:-15,f:25},r:'军纪严明、秋毫无犯。柏人百姓送来劳军酒——你的“品牌部”又立功了。'},
+    {b:'😴 全军休整，磨刀不误砍柴工',s:'粮饷 +25（就地征购顺利）· 兵马 +12',fx:{g:25,a:12},r:'睡了个整觉，战马都长膘了。路过的猎户主动加入斥候队。'}]); return; }
   // city / key
   if(!owned[pos]){
     var can=grain>=t.price;
@@ -430,8 +431,8 @@ function land(){
     showEvent(t.key?'👑 关键城 · 招抚谈判':'🏯 城池 · 招抚谈判', t.n+'：买下这座城？',
       (pos===5?'⚠️ 王郎在此称帝，城防最硬、价码最高——但拿下它，等于直接击穿竞品总部。<br>':'')+'守将开价 <b>'+t.price+' 粮饷</b>：开城归附、守军成建制来投（兵马 +'+t.army+'），此后每圈收租 '+t.rent+' 粮'+(level[pos]?'':'')+'。'+(persuade?'<br>✨ 你的民心已达 '+fame+'，可走“仁德招抚”半价通道！':'<br>民心达到 75 可解锁半价仁德招抚，先去攒攒口碑？'),
       [
-       {b:'💰 出粮招抚，买下'+t.n, s: can?('粮饷 -'+t.price+' · 兵马 +'+t.army+' · 每圈租 +'+t.rent):'粮饷不足（现有 '+grain+'）', disabled:!can, fx:{g:-t.price,a:t.army}, fn:function(){owned[pos]=true;level[pos]=1;log('🏯 <b>拿下'+t.n+'</b>！守军来投，城头换上刘字旗。')}, r:'城门大开，百姓夹道。你的版图又多了一块拼图。'},
-       {b: persuade?'❤️ 仁德招抚（半价）':'🚶 暂且绕过，去别处融资', s: persuade?('粮饷 -'+Math.ceil(t.price/2)+' · 兵马 +'+t.army+' · 民心 -6'):'不花粮饷 · 民心 +3（不扰民）', fx: persuade?{g:-Math.ceil(t.price/2),a:t.army,f:-6}:{f:3}, fn: persuade?function(){owned[pos]=true;level[pos]=1;log('❤️ <b>仁德招抚'+t.n+'</b>：守将感念你的名声，半价开城！')}:null, r: persuade?'一封书信抵万兵。守将说：“冲您这名声，这城跟您干。”':'你秋毫无犯地绕城而过。守将站在城头，记住了这支不抢粮的队伍。'}
+       {b:'💰 出粮招抚，买下'+t.n, s: can?('粮饷 -'+t.price+' · 兵马 +'+t.army+' · 缴获官仓 +'+Math.floor(t.price*0.18)+' · 每圈租 +'+t.rent):'粮饷不足（现有 '+grain+'）', disabled:!can, fx:{g:-t.price,a:t.army}, fn:(function(){var gg=Math.floor(t.price*0.18);return function(){owned[pos]=true;level[pos]=1;apply({g:gg});log('🏯 <b>拿下'+t.n+'</b>！守军来投，缴获官仓 <b>+'+gg+'</b>，城头换上刘字旗。')}})(), r:'城门大开，百姓夹道。你的版图又多了一块拼图。'},
+       {b: persuade?'❤️ 仁德招抚（半价）':'🚶 暂且绕过，去别处融资', s: persuade?('粮饷 -'+Math.ceil(t.price/2)+' · 兵马 +'+t.army+' · 缴获官仓 +'+Math.floor(t.price*0.1)+' · 民心 -2'):'不花粮饷 · 民心 +3（不扰民）', fx: persuade?{g:-Math.ceil(t.price/2),a:t.army,f:-2}:{f:3}, fn: persuade?(function(){var gg=Math.floor(t.price*0.1);return function(){owned[pos]=true;level[pos]=1;apply({g:gg});log('❤️ <b>仁德招抚'+t.n+'</b>：守将感念你的名声，半价开城！缴获官仓 <b>+'+gg+'</b>。')}})():null, r: persuade?'一封书信抵万兵。守将说：“冲您这名声，这城跟您干。”':'你秋毫无犯地绕城而过。守将站在城头，记住了这支不抢粮的队伍。'}
       ]);
     return;
   }
@@ -448,7 +449,7 @@ function syncBtns(){ var dis=busy||over; $('rollBtn').disabled=dis; $('rollBtnM'
 function roll(){
   if(busy||over)return; busy=true; syncBtns();
   sfx.roll(); buzz([15,25,15,25,15]);
-  apply({g:-8},null,true); log('🌾 全军行军粮耗 <b>-8</b>');
+  var mc=marchCost(); apply({g:-mc},null,true); log('🌾 全军行军粮耗 <b>-'+mc+'</b>'+(mc<8?'（民心感召，百姓箪食壶浆相送）':''));
   if(grain<=0){update(); checkEnd(); return}
   turn++; var diceEl=$('dice'); diceEl.classList.add('rolling');
   var n=1+Math.floor(Math.random()*6); var cnt=0;
@@ -458,7 +459,7 @@ function stepMove(n){
   if(n<=0){ update(); sfx.click(); buzz(20); setTimeout(land,250); return }
   pos=(pos+1)%TILES.length;
   sfx.step(); buzz(6);
-  if(pos===0){ lap++; var rent=0; Object.keys(owned).forEach(function(k){rent+=TILES[k].rent*(level[k]||1)}); var total=30+rent; apply({g:total}); log('🔁 完成一圈回到信都！路演收租 <b>+'+total+'</b>（含各城租粮 '+rent+'）'); checkRoundsBonus(); }
+  if(pos===0){ lap++; var rent=0; Object.keys(owned).forEach(function(k){rent+=TILES[k].rent*(level[k]||1)}); var armyBonus=Math.floor(army/40)*6; var fameBonus=Math.floor(fame/20)*4; var total=45+rent+armyBonus+fameBonus; apply({g:total}); log('🔁 完成一圈回到信都！路演收租 <b>+'+total+'</b>（含各城 '+rent+' · 兵马红利 +'+armyBonus+' · 民心红利 +'+fameBonus+'）'); checkRoundsBonus(); }
   update(); setTimeout(function(){stepMove(n-1)},330);
 }
 $('rollBtn').onclick=roll; $('rollBtnM').onclick=roll;
