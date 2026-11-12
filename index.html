@@ -222,7 +222,7 @@ footer{color:#a68a54;text-align:center;font-size:12.5px;line-height:1.8;padding:
   <div class="big" id="endTitle"></div>
   <p id="endText"></p>
   <p id="endStats" style="font-weight:700"></p>
-  <div class="choices"><button class="choice" style="text-align:center" onclick="location.reload()"><b>↺ 再来一局 · 换个打法</b><small>历史可以重开，骰子重新做人</small></button></div>
+  <div class="choices"><button class="choice" style="text-align:center" onclick="try{sfx.click();buzz(12)}catch(e){};location.reload()"><b>↺ 再来一局 · 换个打法</b><small>历史可以重开，骰子重新做人</small></button></div>
 </div></div>
 
 <script>
@@ -290,13 +290,60 @@ TILES.forEach(function(t,i){
 });
 function $(id){return document.getElementById(id)}
 function log(html){var el=document.createElement('div');el.innerHTML=html;$('log').prepend(el)}
+/* ===== 音效 & 震动 ===== */
+var SFX_ON=(function(){try{return localStorage.getItem('lx_sfx')!=='0'}catch(e){return true}})();
+var actx=null;
+function ac(){
+  if(!SFX_ON)return null;
+  var C=window.AudioContext||window.webkitAudioContext; if(!C)return null;
+  if(!actx){ try{actx=new C()}catch(e){return null} }
+  if(actx.state==='suspended'){ try{actx.resume()}catch(e){} }
+  return actx;
+}
+function tone(f1,f2,dur,type,vol,delay){
+  var c=ac(); if(!c)return;
+  var t0=c.currentTime+(delay||0);
+  var o=c.createOscillator(), g=c.createGain();
+  o.type=type||'sine'; o.frequency.setValueAtTime(f1,t0);
+  if(f2&&f2!==f1)o.frequency.exponentialRampToValueAtTime(Math.max(20,f2),t0+dur);
+  g.gain.setValueAtTime(0,t0);
+  g.gain.linearRampToValueAtTime(vol||0.06,t0+0.008);
+  g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+  o.connect(g); g.connect(c.destination); o.start(t0); o.stop(t0+dur+0.02);
+}
+function noise(dur,vol,delay,freq){
+  var c=ac(); if(!c)return;
+  var t0=c.currentTime+(delay||0);
+  var n=Math.max(1,Math.floor(c.sampleRate*dur)), b=c.createBuffer(1,n,c.sampleRate), d=b.getChannelData(0);
+  for(var i=0;i<n;i++){d[i]=(Math.random()*2-1)*(1-i/n)}
+  var s=c.createBufferSource(); s.buffer=b;
+  var f=c.createBiquadFilter(); f.type='bandpass'; f.frequency.value=freq||1200; f.Q.value=1.2;
+  var g=c.createGain(); g.gain.setValueAtTime(vol||0.08,t0); g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+  s.connect(f); f.connect(g); g.connect(c.destination); s.start(t0);
+}
+function buzz(p){ if(!SFX_ON)return; if(navigator.vibrate){ try{navigator.vibrate(p)}catch(e){} } }
+var sfx={
+  click:function(){ tone(760,980,0.05,'square',0.035) },
+  step:function(){ tone(190,150,0.06,'triangle',0.05) },
+  roll:function(){ noise(0.05,0.07,0,2200); noise(0.05,0.06,0.09,1800); noise(0.06,0.05,0.18,2600); tone(520,300,0.18,'square',0.03,0) },
+  coin:function(){ tone(988,988,0.08,'sine',0.05); tone(1319,1319,0.12,'sine',0.045,0.06) },
+  spend:function(){ tone(340,190,0.12,'triangle',0.05) },
+  buy:function(){ [523,659,784].forEach(function(f,i){ tone(f,f,0.12,'triangle',0.05,i*0.07) }) },
+  up:function(){ [440,554,659,880].forEach(function(f,i){ tone(f,f,0.1,'square',0.035,i*0.06) }) },
+  pop:function(){ noise(0.12,0.05,0,900); tone(420,760,0.1,'sine',0.04) },
+  page:function(){ noise(0.16,0.05,0,2600); noise(0.1,0.035,0.1,1400) },
+  round:function(){ tone(784,784,0.14,'sine',0.055); tone(1046,1046,0.2,'sine',0.05,0.1) },
+  win:function(){ [523,659,784,1046,1318].forEach(function(f,i){ tone(f,f,0.22,'triangle',0.06,i*0.13) }) },
+  lose:function(){ [392,330,262,196].forEach(function(f,i){ tone(f,f*0.98,0.26,'sine',0.055,i*0.15) }) }
+};
 function titles(){ if(owned[5]&&owned[13]&&army>=200)return"鄗城待登基"; if(Object.keys(owned).length>=8)return"河北行台"; if(Object.keys(owned).length>=5)return"大司马"; if(Object.keys(owned).length>=3)return"行大司马事"; return"持节使者"}
 function floatFx(txt,color,x,y){var s=document.createElement('div');s.className='floatnum';s.textContent=txt;s.style.color=color||'#9e1b1b';s.style.left=(x||innerWidth/2)+'px';s.style.top=(y||180)+'px';document.body.appendChild(s);setTimeout(function(){s.remove()},1250)}
-function apply(fx,srcEl){
+function apply(fx,srcEl,silent){
   if(!fx)return;
   if(fx.g){grain+=fx.g; flash('resGrain'); floatFx((fx.g>0?'+':'')+fx.g+' 粮饷', fx.g>0?'#2f5d50':'#c1271e', innerWidth*0.3,150)}
   if(fx.a){army+=fx.a; flash('resArmy'); floatFx((fx.a>0?'+':'')+fx.a+' 兵马','#9e1b1b', innerWidth*0.5,150)}
   if(fx.f){fame=Math.max(0,Math.min(120,fame+fx.f)); flash('resFame'); floatFx((fx.f>0?'+':'')+fx.f+' 民心', fx.f>0?'#2f5d50':'#c1271e', innerWidth*0.7,150)}
+  if(!silent){var net=(fx.g||0)+(fx.a||0)+(fx.f||0); if(net>0){sfx.coin();buzz(12)} else if(net<0){sfx.spend();buzz(8)}}
   update();
 }
 function flash(id){var e=$(id);e.classList.remove('flash');void e.offsetWidth;e.classList.add('flash')}
@@ -331,16 +378,17 @@ function showEvent(tag,title,text,choices){
     var b=document.createElement('button'); b.className='choice';
     b.innerHTML='<b>'+c.b+'</b><small>'+c.s+'</small>';
     if(c.disabled)b.disabled=true;
-    b.onclick=function(){ $('eventMask').classList.remove('show'); if(c.fx)apply(c.fx); if(c.flag)flags[c.flag]=true; if(c.fn)c.fn(); if(c.r)log('▸ '+c.r); afterAction(); };
+    b.onclick=function(){ $('eventMask').classList.remove('show'); var label=b.textContent||''; if(label.indexOf('招抚')>=0||label.indexOf('买下')>=0){sfx.buy();buzz([18,25,30])} else if(label.indexOf('升级')>=0){sfx.up();buzz([12,20,16])} else {sfx.click();buzz(8)} if(c.fx)apply(c.fx); if(c.flag)flags[c.flag]=true; if(c.fn)c.fn(); if(c.r)log('▸ '+c.r); afterAction(); };
     box.appendChild(b);
   });
+  sfx.pop(); buzz(10);
   $('eventMask').classList.add('show');
 }
 function afterAction(){ checkRoundsBonus(); update(); if(checkEnd())return; busy=false; syncBtns(); $('hint').textContent='再掷一次！连胜的势头别停 🔥'; }
 function checkRoundsBonus(){
   // bonuses granted once when round newly completes (detected via flag set)
   ROUNDS.forEach(function(r){
-    if(r.test() && !r['bonusGiven']){ r['bonusGiven']=true;
+    if(r.test() && !r['bonusGiven']){ r['bonusGiven']=true; sfx.round(); buzz([20,40,20]);
       if(r.id==='angel'){apply({g:40}); log('💰 天使轮到账：信都豪强赠粮 <b>+40</b>')}
       if(r.id==='seed'){apply({a:110,f:10}); log('💍 种子轮交割：真定王刘扬十万之众来会，兵马 <b>+110</b>！')}
       if(r.id==='a'){apply({g:60,f:12}); log('📈 A轮交割：中山豪强团认购，粮饷 <b>+60</b>')}
@@ -361,6 +409,7 @@ function showEnd(win){
   if(win){ $('endTitle').textContent='🎉 建武登基 · 拿下河北！'; $('endText').innerHTML='公元25年，鄗城千秋亭。你的投资人们——刘扬的兵、彭宠的粮、耿况的突骑、铜马军的人心——一起把那份商业计划书推上了龙椅。<br><b>所谓融资，不过是让天下人相信：跟你走，有未来。</b>云台二十八将，皆为本轮股东。'; }
   else{ $('endTitle').textContent='💸 粮饷耗尽 · 创业未竟'; $('endText').innerHTML='军无粮则散。你的队伍在河北的寒风里星散，王郎的檄文贴满了城门。<br>复盘提示：<b>先拿粮仓与真定、别硬啃邯郸、多在机会卡里攒民心</b>——历史给了刘秀第二次机会（他差点死在蓟县），也给你。'; }
   $('endStats').textContent='本局 '+turn+' 回合 · '+lap+' 圈 · 据城 '+Object.keys(owned).length+' 座 · 兵马 '+army+' · 民心 '+fame;
+  if(win){sfx.win();buzz([40,60,40,60,90])} else {sfx.lose();buzz([120,70,120])}
   $('endMask').classList.add('show');
 }
 function land(){
@@ -398,23 +447,25 @@ var DICE=['⚀','⚁','⚂','⚃','⚄','⚅'];
 function syncBtns(){ var dis=busy||over; $('rollBtn').disabled=dis; $('rollBtnM').disabled=dis; }
 function roll(){
   if(busy||over)return; busy=true; syncBtns();
-  apply({g:-8}); log('🌾 全军行军粮耗 <b>-8</b>');
+  sfx.roll(); buzz([15,25,15,25,15]);
+  apply({g:-8},null,true); log('🌾 全军行军粮耗 <b>-8</b>');
   if(grain<=0){update(); checkEnd(); return}
   turn++; var diceEl=$('dice'); diceEl.classList.add('rolling');
   var n=1+Math.floor(Math.random()*6); var cnt=0;
-  var iv=setInterval(function(){ diceEl.textContent=DICE[Math.floor(Math.random()*6)]; if(++cnt>9){clearInterval(iv); diceEl.classList.remove('rolling'); diceEl.textContent=DICE[n-1]; stepMove(n);} },70);
+  var iv=setInterval(function(){ diceEl.textContent=DICE[Math.floor(Math.random()*6)]; if(++cnt>9){clearInterval(iv); diceEl.classList.remove('rolling'); diceEl.textContent=DICE[n-1]; sfx.click(); buzz(15); stepMove(n);} },70);
 }
 function stepMove(n){
-  if(n<=0){ update(); setTimeout(land,250); return }
+  if(n<=0){ update(); sfx.click(); buzz(20); setTimeout(land,250); return }
   pos=(pos+1)%TILES.length;
+  sfx.step(); buzz(6);
   if(pos===0){ lap++; var rent=0; Object.keys(owned).forEach(function(k){rent+=TILES[k].rent*(level[k]||1)}); var total=30+rent; apply({g:total}); log('🔁 完成一圈回到信都！路演收租 <b>+'+total+'</b>（含各城租粮 '+rent+'）'); checkRoundsBonus(); }
   update(); setTimeout(function(){stepMove(n-1)},330);
 }
 $('rollBtn').onclick=roll; $('rollBtnM').onclick=roll;
-function openBPfn(){ $('bpMask').classList.add('show') }
-function closeBP(){ $('bpMask').classList.remove('show') }
+function openBPfn(){ sfx.page(); buzz(8); $('bpMask').classList.add('show') }
+function closeBP(){ sfx.click(); buzz(8); $('bpMask').classList.remove('show') }
 $('openBP').onclick=openBPfn; $('openBPM').onclick=openBPfn;
-$('restart2').onclick=function(){location.reload()};
+$('restart2').onclick=function(){ sfx.click(); buzz(12); location.reload() };
 log('📜 公元24年，你带着昆阳的战报和一纸计划书，持节渡河。信都开城相迎——<b>天使轮到账在即</b>，掷下第一颗骰子吧！');
 checkRoundsBonus(); update(); syncBtns();
 </script>
